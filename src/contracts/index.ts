@@ -20,14 +20,6 @@ export type { MultiAutocompleteFieldConfig } from './multi-autocomplete-field.co
 export type { FileFieldConfig } from './file-field.contract';
 export type { ArrayFieldConfig } from './array-field.contract';
 
-export type {
-  FormDef,
-  FormStep,
-  StepComponentProps,
-  InferFormValues,
-  InferStepFormValues,
-  FieldGroupDef,
-  DetailFieldDef,
-} from './form.contract';
+export type { FormStep, StepComponentProps } from './form.contract';
 export type { FormFieldSlots } from './field-slots.contract';
 export type { StepperProps, StepperStep, StepperWrapper } from './stepper.contract';
