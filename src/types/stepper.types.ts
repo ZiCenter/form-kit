@@ -3,7 +3,7 @@ import type { FormStep } from './form.types';
 
 export type StepperStep = Pick<FormStep, 'id' | 'label' | 'icon'> & { description: string };
 
-export interface StepperContract extends PropsWithChildren<{
+export interface StepperProps extends PropsWithChildren<{
   title?: string;
   currentStep: number;
   steps: StepperStep[];
@@ -14,4 +14,4 @@ export interface StepperContract extends PropsWithChildren<{
   onCancel?: () => void;
 }> {}
 
-export type StepperWrapper = ComponentType<StepperContract>;
+export type StepperWrapper = ComponentType<StepperProps>;

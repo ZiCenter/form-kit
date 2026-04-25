@@ -89,7 +89,7 @@ const steps: FormStep[] = defineSteps([
 ]);
 ```
 
-Pass to a stepper that implements the `StepperContract`.
+Pass to a stepper that implements the `StepperProps`.
 
 ## Public API
 
@@ -105,7 +105,7 @@ Pass to a stepper that implements the `StepperContract`.
 
 ### Types
 - `FieldDef`, `FieldGroupDef`, `DetailFieldDef`, `FormDef`
-- `FormStep`, `StepComponentProps`, `StepperContract`, `StepperStep`
+- `FormStep`, `StepComponentProps`, `StepperProps`, `StepperStep`
 - `FormFieldRenderProps`, `FormFieldSlots`
 - `InferFormValues<T>` — derives the value type from a `FieldDef[]`
 

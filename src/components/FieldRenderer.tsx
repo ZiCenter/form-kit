@@ -1,37 +1,32 @@
 import type { UseFormReturn } from 'react-hook-form';
-import type { FieldDef } from '../types';
-import { useFormFieldSlots } from '../providers/FormFieldProvider';
+import type { Field } from '../models/Field';
 
 interface FieldRendererProps {
-  field: FieldDef;
+  field: Field;
   form: UseFormReturn<any>;
 }
 
 /**
  * Headless field dispatcher.
  *
- * Handles visibility and disabled logic, then delegates all rendering
- * to the consumer-provided field slot component. Renders no visual
- * elements of its own — the slot component owns label, error, input, and layout.
+ * Handles visibility and disabled logic, then delegates rendering to the
+ * field instance's own Renderer (which pulls its slot from FormFieldProvider).
  */
 export function FieldRenderer({ field, form }: FieldRendererProps) {
-  const fieldSlots = useFormFieldSlots();
   const formValues = form.watch();
 
-  if (field.visibleWhen && !field.visibleWhen(formValues)) {
+  if (!field.isVisible(formValues)) {
     return null;
   }
 
-  const disabled =
-    typeof field.disabled === 'function' ? field.disabled(formValues) : !!field.disabled;
-
+  const disabled = field.isDisabled(formValues);
   const value = form.watch(field.key);
   const error = form.formState.errors[field.key]?.message as string | undefined;
 
-  const FieldComponent = fieldSlots[field.type];
+  const FieldComp = field.Renderer;
 
   return (
-    <FieldComponent
+    <FieldComp
       field={field}
       value={value}
       onChange={(v) => form.setValue(field.key, v)}

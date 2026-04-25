@@ -1,39 +1,39 @@
 import type { ComponentType } from 'react';
-import type { UseFormRegister, UseFormReturn, FieldValues } from 'react-hook-form';
-import type { FieldDef } from './form.types';
+import type {
+  ArrayField,
+  AutocompleteField,
+  CheckboxField,
+  CurrencyField,
+  DateField,
+  FileField,
+  FormFieldRenderProps,
+  MultiAutocompleteField,
+  MultiselectField,
+  NumberField,
+  SelectField,
+  TextField,
+  TextareaField,
+} from '../models/Field';
+
+export type { FormFieldRenderProps };
 
 /**
- * Props every field slot component receives.
- *
- * Each field component is fully responsible for rendering its own
- * label, required marker, error display, span, and input control.
- * The form engine provides the data; the consumer owns all visuals.
- */
-export interface FormFieldRenderProps {
-  field: FieldDef;
-  value: any;
-  onChange: (value: any) => void;
-  disabled: boolean;
-  error?: string;
-  register: UseFormRegister<FieldValues>;
-  form: UseFormReturn<any>;
-}
-
-/**
- * Map of field type → component.
- * Consumer registers concrete implementations for each field type.
+ * Map of field slot key → component, with each slot specialized to its
+ * concrete field class. Consumer slot components get typed access to
+ * class-specific properties (e.g. ArrayField.itemFields, SelectField.options)
+ * and a typed `value` derived from the class's output type.
  */
 export interface FormFieldSlots {
-  text: ComponentType<FormFieldRenderProps>;
-  number: ComponentType<FormFieldRenderProps>;
-  currency: ComponentType<FormFieldRenderProps>;
-  date: ComponentType<FormFieldRenderProps>;
-  textarea: ComponentType<FormFieldRenderProps>;
-  checkbox: ComponentType<FormFieldRenderProps>;
-  select: ComponentType<FormFieldRenderProps>;
-  multiselect: ComponentType<FormFieldRenderProps>;
-  autocomplete: ComponentType<FormFieldRenderProps>;
-  'multi-autocomplete': ComponentType<FormFieldRenderProps>;
-  file: ComponentType<FormFieldRenderProps>;
-  array: ComponentType<FormFieldRenderProps>;
+  text: ComponentType<FormFieldRenderProps<TextField>>;
+  textarea: ComponentType<FormFieldRenderProps<TextareaField>>;
+  number: ComponentType<FormFieldRenderProps<NumberField>>;
+  currency: ComponentType<FormFieldRenderProps<CurrencyField>>;
+  date: ComponentType<FormFieldRenderProps<DateField>>;
+  checkbox: ComponentType<FormFieldRenderProps<CheckboxField>>;
+  select: ComponentType<FormFieldRenderProps<SelectField>>;
+  multiselect: ComponentType<FormFieldRenderProps<MultiselectField>>;
+  autocomplete: ComponentType<FormFieldRenderProps<AutocompleteField>>;
+  'multi-autocomplete': ComponentType<FormFieldRenderProps<MultiAutocompleteField>>;
+  file: ComponentType<FormFieldRenderProps<FileField>>;
+  array: ComponentType<FormFieldRenderProps<ArrayField>>;
 }

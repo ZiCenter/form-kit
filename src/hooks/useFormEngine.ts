@@ -1,10 +1,10 @@
 import { useForm, type UseFormReturn } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { FieldDef } from '../types';
+import type { Field } from '../models/Field';
 import { buildZodSchema } from '../utils/validation-builder';
 
 interface UseFormEngineOptions {
-  fields: readonly FieldDef[];
+  fields: readonly Field[];
   defaultValues?: Record<string, any>;
   onSubmit: (values: any) => void;
 }
@@ -19,8 +19,8 @@ interface FieldState {
 interface UseFormEngineReturn {
   form: UseFormReturn<any>;
   handleSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  fields: readonly FieldDef[];
-  getFieldState: (field: FieldDef) => FieldState;
+  fields: readonly Field[];
+  getFieldState: (field: Field) => FieldState;
   reset: () => void;
 }
 
@@ -42,15 +42,16 @@ export function useFormEngine({
 
   const handleSubmit = form.handleSubmit(onSubmit);
 
-  const getFieldState = (field: FieldDef): FieldState => {
+  const getFieldState = (field: Field): FieldState => {
     const formValues = form.getValues();
     const error = form.formState.errors[field.key]?.message as string | undefined;
     const value = form.getValues(field.key);
-    const isVisible = field.visibleWhen ? field.visibleWhen(formValues) : true;
-    const isDisabled =
-      typeof field.disabled === 'function' ? field.disabled(formValues) : !!field.disabled;
-
-    return { isVisible, isDisabled, error, value };
+    return {
+      isVisible: field.isVisible(formValues),
+      isDisabled: field.isDisabled(formValues),
+      error,
+      value,
+    };
   };
 
   const reset = () => form.reset(defaultValues ?? {});
