@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
-import type { Field, FormStep } from '../contracts';
+import type {FormStep} from "../models/FormStep/FormStep";
 
 export function useStepperNavigation(steps: FormStep[], form: UseFormReturn<any>) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -14,12 +14,7 @@ export function useStepperNavigation(steps: FormStep[], form: UseFormReturn<any>
       return;
     }
     if (targetStep === currentStep) return;
-    if (step.component) {
-      setCurrentStep(targetStep);
-      return;
-    }
-    const stepFields = step.fields?.map((f: Field) => f.key) ?? [];
-    const valid = await form.trigger(stepFields);
+    const valid = await step.trigger(form)
     if (valid) setCurrentStep(targetStep);
   };
 

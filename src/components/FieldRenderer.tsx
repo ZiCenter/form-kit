@@ -1,5 +1,5 @@
 import type { UseFormReturn } from 'react-hook-form';
-import type { Field } from '../contracts';
+import type { Field } from '../contracts/field.contract';
 
 interface FieldRendererProps {
   field: Field;

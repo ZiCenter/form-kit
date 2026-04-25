@@ -1,5 +1,10 @@
 import type { ComponentType, PropsWithChildren } from 'react';
-import type { FormStep } from './form.contract';
+import type {UseFormReturn} from "react-hook-form";
+import type {FormStep} from "../models/FormStep/FormStep";
+
+export interface StepComponentProps {
+    form: UseFormReturn<Record<string, any>>;
+}
 
 export type StepperStep = Pick<FormStep, 'id' | 'label' | 'icon'> & { description: string };
 

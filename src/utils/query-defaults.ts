@@ -1,5 +1,5 @@
 import { z } from 'zod/v4';
-import type { Field } from '../contracts';
+import type { Field } from '../contracts/field.contract';
 import { ArrayField, FileField } from '../models/Field';
 
 export function coerceQueryParams(

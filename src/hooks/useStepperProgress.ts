@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
-import type { Field, FormStep } from '../contracts';
+import type { Field } from '../contracts/field.contract';
+import type { FormStep } from '../models/FormStep/FormStep';
 
 export function useStepperProgress(
   steps: FormStep[],
@@ -16,11 +17,6 @@ export function useStepperProgress(
 
   const stepDescriptions = useMemo(() => {
     return steps.map((s, i) => {
-      if (s.component) {
-        if (i < currentStep) return 'Completed';
-        if (i === currentStep) return 'In progress';
-        return 'Not started';
-      }
       const fields = s.fields ?? [];
       if (fields.length === 0) {
         if (i < currentStep) return 'Completed';

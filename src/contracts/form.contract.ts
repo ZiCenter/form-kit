@@ -1,19 +1,19 @@
-import type { ComponentType } from 'react';
-import type { UseFormReturn } from 'react-hook-form';
-import type { Field } from './field.contract';
+import type { ComponentType, PropsWithChildren } from 'react';
 
-// ── Form Definition ──
-export interface FormStep {
-  id: string;
-  label: string;
-  icon?: string;
-  fields?: readonly Field[] | Field[];
-  component?: ComponentType<StepComponentProps>;
-  getData?: () => Promise<any>;
+// ── Shared form props ──
+export interface BaseFormProps {
+  defaultValues?: Record<string, any>;
+  onSubmit: (values: any) => void;
+  isSubmitting?: boolean;
+  onCancel?: () => void;
+  onFormValuesChange?: (values: Record<string, any>) => void;
 }
 
-// ── Step Component Props ──
-export interface StepComponentProps {
-  form: UseFormReturn<Record<string, any>>;
-  getData?: () => Promise<any>;
-}
+// ── Basic Form Wrapper ──
+export interface FormWrapperProps extends PropsWithChildren<{
+  handleSubmit: () => void;
+  isSubmitting?: boolean;
+  onCancel?: () => void;
+}> {}
+
+export type FormWrapper = ComponentType<FormWrapperProps>;

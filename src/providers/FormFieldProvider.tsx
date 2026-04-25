@@ -1,30 +1,28 @@
 import { createContext, useContext, type ReactNode } from 'react';
-import type { FormFieldSlots, StepperWrapper } from '../contracts';
+import type { FormFieldSlots } from '../contracts/field-slots.contract';
+import type { FormWrapper } from '../contracts/form.contract';
+import type { StepperWrapper } from '../contracts/stepper.contract';
 
 interface FormEngineContextValue {
   slots: FormFieldSlots;
-  StepperWrapper: StepperWrapper;
+  StepperWrapper?: StepperWrapper;
+  FormWrapper?: FormWrapper;
 }
 
 const FormEngineContext = createContext<FormEngineContextValue | null>(null);
 
 interface FormFieldProviderProps {
   slots: FormFieldSlots;
-  StepperWrapper: StepperWrapper;
+  /** Required when using StepperForm. */
+  StepperWrapper?: StepperWrapper;
+  /** Required when using BasicForm. */
+  FormWrapper?: FormWrapper;
   children: ReactNode;
 }
 
-/**
- * Provides the form engine with its concrete implementations:
- * - `slots`: field components keyed by field type (text, select, date, ...)
- * - `StepperWrapper`: the stepper shell component that renders step UI
- *
- * Each consuming app wraps its tree with this provider once. FormEngine
- * itself reads both values from context — no props required at the call site.
- */
-export function FormFieldProvider({ slots, StepperWrapper, children }: FormFieldProviderProps) {
+export function FormFieldProvider({ slots, StepperWrapper, FormWrapper, children }: FormFieldProviderProps) {
   return (
-    <FormEngineContext.Provider value={{ slots, StepperWrapper }}>
+    <FormEngineContext.Provider value={{ slots, StepperWrapper, FormWrapper }}>
       {children}
     </FormEngineContext.Provider>
   );
@@ -33,7 +31,7 @@ export function FormFieldProvider({ slots, StepperWrapper, children }: FormField
 function useFormEngineContext(): FormEngineContextValue {
   const ctx = useContext(FormEngineContext);
   if (!ctx) {
-    throw new Error('FormEngine requires a <FormFieldProvider>. Did you forget to wrap your app?');
+    throw new Error('Form components require a <FormFieldProvider>. Did you forget to wrap your app?');
   }
   return ctx;
 }
@@ -43,7 +41,20 @@ export function useFormFieldSlots(): FormFieldSlots {
   return useFormEngineContext().slots;
 }
 
-/** Access the consumer-provided stepper shell component. */
+/** Access the consumer-provided basic form wrapper. Only valid when using BasicForm. */
+export function useFormWrapper(): FormWrapper {
+  const { FormWrapper } = useFormEngineContext();
+  if (!FormWrapper) {
+    throw new Error('BasicForm requires a FormWrapper prop on <FormFieldProvider>.');
+  }
+  return FormWrapper;
+}
+
+/** Access the consumer-provided stepper shell component. Only valid when using StepperForm. */
 export function useStepperWrapper(): StepperWrapper {
-  return useFormEngineContext().StepperWrapper;
+  const { StepperWrapper } = useFormEngineContext();
+  if (!StepperWrapper) {
+    throw new Error('StepperForm requires a StepperWrapper prop on <FormFieldProvider>.');
+  }
+  return StepperWrapper;
 }

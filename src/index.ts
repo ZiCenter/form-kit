@@ -1,12 +1,10 @@
 // ── Components ──
-export { FormEngine } from './components/FormEngine';
+export { BasicForm } from './components/BasicForm';
+export { StepperForm } from './components/StepperForm';
 export { FieldRenderer } from './components/FieldRenderer';
 
 // ── Providers ──
 export { FormFieldProvider } from './providers/FormFieldProvider';
-
-// ── Hooks ──
-export { useFormEngine } from './hooks/useFormEngine';
 
 // ── Utilities ──
 export { mapRawOptions } from './utils/template-resolver';
@@ -29,9 +27,14 @@ export {
   ArrayField,
 } from './models/Field';
 
+// ── Step classes ──
+export { DefaultFormStep } from './models/FormStep/DefaultFormStep';
+export { CustomFormStep } from './models/FormStep/CustomFormStep';
+
 // ── Public types ──
 export type { Field } from './contracts/field.contract';
 export type { FormFieldRenderProps } from './contracts/field-renderer.contract';
 export type { FormFieldSlots } from './contracts/field-slots.contract';
-export type { FormStep, StepComponentProps } from './contracts/form.contract';
-export type { StepperProps, StepperStep, StepperWrapper } from './contracts/stepper.contract';
+export type { BaseFormProps, FormWrapperProps, FormWrapper } from './contracts/form.contract';
+export type { FormStep } from './models/FormStep/FormStep';
+export type { StepperProps, StepperStep, StepperWrapper, StepComponentProps } from './contracts/stepper.contract';
