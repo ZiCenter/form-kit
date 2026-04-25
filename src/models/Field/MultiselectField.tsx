@@ -1,10 +1,17 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
 import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
-import type { MultiselectFieldConfig } from '../../contracts/multiselect-field.contract';
-import type { MultiselectSchema } from '../../types/field-schemas';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField } from './Field';
+import { BaseField, type FieldBaseConfig, type OptionConfig } from './Field';
+
+type MultiselectSchema = z.ZodArray<z.ZodUnion<[z.ZodString, z.ZodNumber]>>;
+
+interface MultiselectFieldConfig<TOption = any>
+  extends FieldBaseConfig<MultiselectSchema, (string | number)[]>,
+    OptionConfig<TOption> {
+  options: () => Promise<TOption[]>;
+  dependsOn?: string;
+}
 
 export class MultiselectField<
   TOption = any,

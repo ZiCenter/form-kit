@@ -13,9 +13,8 @@ export { mapRawOptions } from './utils/template-resolver';
 export { coerceQueryParams } from './utils/query-defaults';
 export { defineFields, defineSteps } from './utils/define';
 
-// ── Field Models (classes) ──
+// ── Field classes ──
 export {
-  BaseField,
   TextField,
   TextareaField,
   NumberField,
@@ -30,30 +29,9 @@ export {
   ArrayField,
 } from './models/Field';
 
-// ── Public Contracts (types) ──
-export type {
-  Field,
-  FieldBaseConfig,
-  OptionConfig,
-  RefineFn,
-  BuildFieldSchemaOptions,
-  FormFieldRenderProps,
-  TextFieldConfig,
-  TextareaFieldConfig,
-  NumberFieldConfig,
-  CurrencyFieldConfig,
-  DateFieldConfig,
-  CheckboxFieldConfig,
-  SelectFieldConfig,
-  MultiselectFieldConfig,
-  AutocompleteFieldConfig,
-  MultiAutocompleteFieldConfig,
-  FileFieldConfig,
-  ArrayFieldConfig,
-  FormStep,
-  StepComponentProps,
-  FormFieldSlots,
-  StepperProps,
-  StepperStep,
-  StepperWrapper,
-} from './contracts';
+// ── Public types ──
+export type { Field } from './contracts/field.contract';
+export type { FormFieldRenderProps } from './contracts/field-renderer.contract';
+export type { FormFieldSlots } from './contracts/field-slots.contract';
+export type { FormStep, StepComponentProps } from './contracts/form.contract';
+export type { StepperProps, StepperStep, StepperWrapper } from './contracts/stepper.contract';

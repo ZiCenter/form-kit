@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
-import type { CheckboxFieldConfig } from '../../contracts/checkbox-field.contract';
 import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField } from './Field';
+import { BaseField, type FieldBaseConfig } from './Field';
+
+type CheckboxFieldConfig = FieldBaseConfig<z.ZodBoolean, boolean>;
 
 export class CheckboxField<
   const TConfig extends CheckboxFieldConfig = CheckboxFieldConfig,

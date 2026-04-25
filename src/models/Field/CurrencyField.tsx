@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
-import type { CurrencyFieldConfig } from '../../contracts/currency-field.contract';
 import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField } from './Field';
+import { BaseField, type FieldBaseConfig } from './Field';
+
+type CurrencyFieldConfig = FieldBaseConfig<z.ZodNumber, number>;
 
 export class CurrencyField<
   const TConfig extends CurrencyFieldConfig = CurrencyFieldConfig,

@@ -82,7 +82,7 @@ const slots: FormFieldSlots = {
     </label>
   ),
   select: ({ field, value, onChange, disabled }) => {
-    // field.options is the loader from SelectFieldConfig
+    // field.options is the loader on the SelectField instance
     // ... render your own <select> using field.options() / field.optionLabel / field.optionValue
     return null;
   },
@@ -219,7 +219,7 @@ A component step receives `{ form, getData? }` so it can read/write `react-hook-
 | `FileField` | `z.ZodType<File>` | `File` |
 | `ArrayField` | object array | `Record<string, any>[]` |
 
-Each class accepts a config matching the corresponding `*FieldConfig` interface. Option-based fields take an async `options: () => Promise<TOption[]>` loader plus optional `optionLabel` / `optionValue` keys (defaults `'name'` / `'id'`). `ArrayField` takes `itemFields: Field[]` to render per-row.
+Each class is constructed with a config object — the constructor signature is the contract. Option-based fields take an async `options: () => Promise<TOption[]>` loader plus optional `optionLabel` / `optionValue` keys (defaults `'name'` / `'id'`). `ArrayField` takes `itemFields: Field[]` to render per-row.
 
 ## Public API
 
@@ -234,12 +234,10 @@ Each class accepts a config matching the corresponding `*FieldConfig` interface.
 - `useFormEngine` — headless alternative if you want to drive layout yourself (returns `{ form, handleSubmit, fields, getFieldState, reset }`)
 
 ### Field classes
-`BaseField`, `TextField`, `TextareaField`, `NumberField`, `CurrencyField`, `DateField`, `CheckboxField`, `SelectField`, `MultiselectField`, `AutocompleteField`, `MultiAutocompleteField`, `FileField`, `ArrayField`.
+`TextField`, `TextareaField`, `NumberField`, `CurrencyField`, `DateField`, `CheckboxField`, `SelectField`, `MultiselectField`, `AutocompleteField`, `MultiAutocompleteField`, `FileField`, `ArrayField`.
 
 ### Types
-- `Field` — alias for any field instance (`BaseField<any, any, any>`)
-- `FieldBaseConfig`, `OptionConfig`, `RefineFn`, `BuildFieldSchemaOptions`
-- `TextFieldConfig`, `TextareaFieldConfig`, `NumberFieldConfig`, `CurrencyFieldConfig`, `DateFieldConfig`, `CheckboxFieldConfig`, `SelectFieldConfig`, `MultiselectFieldConfig`, `AutocompleteFieldConfig`, `MultiAutocompleteFieldConfig`, `FileFieldConfig`, `ArrayFieldConfig`
+- `Field` — alias for any field instance
 - `FormFieldRenderProps<F>` — props passed to slot components
 - `FormFieldSlots` — slot map type
 - `FormStep`, `StepComponentProps`

@@ -1,10 +1,17 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
 import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
-import type { SelectFieldConfig } from '../../contracts/select-field.contract';
-import type { SelectSchema } from '../../types/field-schemas';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField } from './Field';
+import { BaseField, type FieldBaseConfig, type OptionConfig } from './Field';
+
+type SelectSchema = z.ZodUnion<[z.ZodString, z.ZodNumber]>;
+
+interface SelectFieldConfig<TOption = any>
+  extends FieldBaseConfig<SelectSchema, string | number>,
+    OptionConfig<TOption> {
+  options: () => Promise<TOption[]>;
+  dependsOn?: string;
+}
 
 export class SelectField<
   TOption = any,
