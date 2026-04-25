@@ -1,6 +1,6 @@
 import { useForm, type UseFormReturn } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { Field } from '../models/Field';
+import type { Field } from '../contracts';
 import { buildZodSchema } from '../utils/validation-builder';
 
 interface UseFormEngineOptions {

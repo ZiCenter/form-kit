@@ -1,5 +1,5 @@
 import {z} from 'zod/v4';
-import type {Field} from '../models/Field';
+import type {Field} from '../contracts';
 
 export function buildZodSchema(fields: readonly Field[]): z.ZodObject<any> {
     return z

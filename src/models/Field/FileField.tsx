@@ -1,15 +1,9 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
+import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
+import type { FileFieldConfig } from '../../contracts/file-field.contract';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField, type FieldBaseConfig } from './Field';
-import type { FormFieldRenderProps } from './FieldRendererProps';
-
-export interface FileFieldConfig extends FieldBaseConfig<z.ZodType<File>, File> {
-  /** MIME filter passed to the <input type="file"> accept attribute. */
-  accept?: string;
-  /** Maximum file size in bytes. */
-  maxSize?: number;
-}
+import { BaseField } from './Field';
 
 export class FileField<
   const TConfig extends FileFieldConfig = FileFieldConfig,

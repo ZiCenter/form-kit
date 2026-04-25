@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react';
-import type { FormFieldSlots, StepperWrapper } from '../types';
+import type { FormFieldSlots, StepperWrapper } from '../contracts';
 
 interface FormEngineContextValue {
   slots: FormFieldSlots;

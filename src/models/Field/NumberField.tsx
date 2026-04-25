@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
+import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
+import type { NumberFieldConfig } from '../../contracts/number-field.contract';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField, type FieldBaseConfig } from './Field';
-import type { FormFieldRenderProps } from './FieldRendererProps';
-
-export type NumberFieldConfig = FieldBaseConfig<z.ZodNumber, number>;
+import { BaseField } from './Field';
 
 export class NumberField<
   const TConfig extends NumberFieldConfig = NumberFieldConfig,

@@ -1,17 +1,10 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
+import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
+import type { MultiAutocompleteFieldConfig } from '../../contracts/multi-autocomplete-field.contract';
+import type { MultiAutocompleteSchema } from '../../types/field-schemas';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField, type FieldBaseConfig, type OptionConfig } from './Field';
-import type { FormFieldRenderProps } from './FieldRendererProps';
-
-type MultiAutocompleteSchema = z.ZodArray<z.ZodUnion<[z.ZodString, z.ZodNumber]>>;
-
-export interface MultiAutocompleteFieldConfig<TOption = any>
-  extends FieldBaseConfig<MultiAutocompleteSchema, (string | number)[]>,
-    OptionConfig<TOption> {
-  search: (query: string) => Promise<any[]>;
-  asyncMinChars?: number;
-}
+import { BaseField } from './Field';
 
 export class MultiAutocompleteField<
   TOption = any,

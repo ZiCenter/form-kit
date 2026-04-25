@@ -1,7 +1,6 @@
 import type { UseFormRegister, UseFormReturn, FieldValues } from 'react-hook-form';
-import type { BaseField, Field } from './Field';
-
-type OutputOf<F> = F extends BaseField<infer O, any, any> ? O : never;
+import type { OutputOf } from '../types/field-output';
+import type { Field } from './field.contract';
 
 /**
  * Props every field slot component receives.

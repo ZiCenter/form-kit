@@ -1,5 +1,6 @@
 import { z } from 'zod/v4';
-import { ArrayField, FileField, type Field } from '../models/Field';
+import type { Field } from '../contracts';
+import { ArrayField, FileField } from '../models/Field';
 
 export function coerceQueryParams(
   params: URLSearchParams,

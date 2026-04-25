@@ -4,7 +4,7 @@ import { useStepperNavigation } from '../hooks/useStepperNavigation';
 import { useStepperProgress } from '../hooks/useStepperProgress';
 import { FieldRenderer } from './FieldRenderer';
 import { useStepperWrapper } from '../providers/FormFieldProvider';
-import type { FormStep, StepperStep } from '../types';
+import type { Field, FormStep, StepperStep } from '../contracts';
 
 type FormEngineProps = {
   title?: string;
@@ -84,7 +84,7 @@ export function FormEngine({
         ) : (
           (() => {
             const fieldElements =
-              step.fields?.map((field) => (
+              step.fields?.map((field: Field) => (
                 <FieldRenderer key={field.key} field={field} form={form} />
               )) ?? [];
             return renderFields ? renderFields(fieldElements) : <>{fieldElements}</>;

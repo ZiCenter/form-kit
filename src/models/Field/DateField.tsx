@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
+import type { DateFieldConfig } from '../../contracts/date-field.contract';
+import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField, type FieldBaseConfig } from './Field';
-import type { FormFieldRenderProps } from './FieldRendererProps';
-
-export type DateFieldConfig = FieldBaseConfig<z.ZodString, string>;
+import { BaseField } from './Field';
 
 export class DateField<
   const TConfig extends DateFieldConfig = DateFieldConfig,

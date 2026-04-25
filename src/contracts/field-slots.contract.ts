@@ -6,7 +6,6 @@ import type {
   CurrencyField,
   DateField,
   FileField,
-  FormFieldRenderProps,
   MultiAutocompleteField,
   MultiselectField,
   NumberField,
@@ -14,8 +13,7 @@ import type {
   TextField,
   TextareaField,
 } from '../models/Field';
-
-export type { FormFieldRenderProps };
+import type { FormFieldRenderProps } from './field-renderer.contract';
 
 /**
  * Map of field slot key → component, with each slot specialized to its

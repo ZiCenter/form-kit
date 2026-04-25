@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
+import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
+import type { TextFieldConfig } from '../../contracts/text-field.contract';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField, type FieldBaseConfig } from './Field';
-import type { FormFieldRenderProps } from './FieldRendererProps';
-
-export type TextFieldConfig = FieldBaseConfig<z.ZodString, string>;
+import { BaseField } from './Field';
 
 export class TextField<
   const TConfig extends TextFieldConfig = TextFieldConfig,

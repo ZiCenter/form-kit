@@ -1,4 +1,4 @@
-import type { OptionConfig } from '../models/Field';
+import type { OptionConfig } from '../contracts';
 
 export function mapRawOptions(
   rawOptions: any[],

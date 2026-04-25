@@ -1,18 +1,10 @@
 import type { FC } from 'react';
 import { z } from 'zod/v4';
+import type { AutocompleteFieldConfig } from '../../contracts/autocomplete-field.contract';
+import type { FormFieldRenderProps } from '../../contracts/field-renderer.contract';
+import type { AutocompleteSchema } from '../../types/field-schemas';
 import { useFormFieldSlots } from '../../providers/FormFieldProvider';
-import { BaseField, type FieldBaseConfig, type OptionConfig } from './Field';
-import type { FormFieldRenderProps } from './FieldRendererProps';
-
-type AutocompleteSchema = z.ZodUnion<[z.ZodString, z.ZodNumber]>;
-
-export interface AutocompleteFieldConfig<TOption = any>
-  extends FieldBaseConfig<AutocompleteSchema, string | number>,
-    OptionConfig<TOption> {
-  search: (query: string) => Promise<any[]>;
-  asyncMinChars?: number;
-  dependsOn?: string;
-}
+import { BaseField } from './Field';
 
 export class AutocompleteField<
   TOption = any,

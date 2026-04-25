@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
-import type { FormStep } from '../types';
-import type { Field } from '../models/Field';
+import type { Field, FormStep } from '../contracts';
 
 export function useStepperNavigation(steps: FormStep[], form: UseFormReturn<any>) {
   const [currentStep, setCurrentStep] = useState(0);

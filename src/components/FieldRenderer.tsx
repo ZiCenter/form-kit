@@ -1,5 +1,5 @@
 import type { UseFormReturn } from 'react-hook-form';
-import type { Field } from '../models/Field';
+import type { Field } from '../contracts';
 
 interface FieldRendererProps {
   field: Field;
@@ -29,7 +29,7 @@ export function FieldRenderer({ field, form }: FieldRendererProps) {
     <FieldComp
       field={field}
       value={value}
-      onChange={(v) => form.setValue(field.key, v)}
+      onChange={(v: unknown) => form.setValue(field.key, v)}
       disabled={disabled}
       error={error}
       register={form.register}
